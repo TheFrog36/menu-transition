@@ -1,0 +1,143 @@
+:root{
+  --final-r: 183;
+  --final-g: 50;
+  --final-b: 202;
+  --initial-r: 3;
+  --initial-g: 252;
+  --initial-b: 243;
+  --menu-bars-initiially-visible: 5;
+  --menu-animation-delay: 0.2s;
+  --number-menu-bars: 10;
+  --menu-bar-height: 30px;
+  --menu-reveal-animation-duration: 2s;
+  --background-color: #0a0a0a;
+}
+
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+html, body{
+  height: 100%;
+  background-color: var(--background-color);
+}
+
+button {
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.74);
+  color: #0a0a0a;
+}
+
+
+#main-container{
+  height: 100%;
+  padding: 6px;
+  overflow: hidden;
+}
+
+#button-container {
+  top: 0px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#menu-container{
+  position: relative;
+  height: 100%;
+  /* overflow: hidden; */
+}
+
+.menu-bar{
+  position: absolute;
+  height: var(--menu-bar-height);
+  border: 1px solid white;
+  /* width: 100%; */
+  transform-origin: calc(var(--menu-bar-height) / 2) calc(var(--menu-bar-height) / 2);
+  transform: rotate(45deg);
+  border-radius: calc(var(--menu-bar-height) / 2);
+  padding: 4px;
+  bottom: calc(
+    (var(--menu-bars-initiially-visible) - var(--i) - 1) 
+    * 
+    (var(--menu-bar-height) * 1.6)
+  );
+  width: calc(
+    var(--menu-bar-height) + 
+    (var(--menu-bars-initiially-visible) - var(--i) - 1) 
+    * 
+    (var(--menu-bar-height) * 2.26)
+  );
+  --red: calc(
+    var(--initial-r) 
+    +
+    ((var(--final-r) - var(--initial-r)) / (var(--menu-bars-initiially-visible) - 1) * var(--i)) 
+  );
+  --green: calc(
+    var(--initial-g) 
+    +
+    ((var(--final-g) - var(--initial-g)) / (var(--menu-bars-initiially-visible) - 1) * var(--i)) 
+  );
+  --blue: calc(
+    var(--initial-b) 
+    +
+    ((var(--final-b) - var(--initial-b)) / (var(--menu-bars-initiially-visible) - 1) * var(--i)) 
+  );
+  background-color: rgb(
+    var(--red),
+    var(--green),
+    var(--blue)
+  );
+  z-index: calc(100 - var(--i));
+  transition: transform, bottom, left, background-color, width 3s;
+  transition-duration: var(--menu-reveal-animation-duration);
+  transition-delay: calc(var(--i) * var(--menu-animation-delay));
+} 
+
+.menu-icon {
+  height: 100%;
+  aspect-ratio: 1;
+  background-color: var(--background-color);
+  border-radius: 50%;
+}
+
+.menu-horizontal{
+  width: 100%;
+  transform: rotate(0deg);
+  --red: calc(
+    var(--initial-r) 
+    +
+    ((var(--final-r) - var(--initial-r)) / (var(--number-menu-bars) - 1) * var(--i)) 
+  );
+  --green: calc(
+    var(--initial-g) 
+    +
+    ((var(--final-g) - var(--initial-g)) / (var(--number-menu-bars) - 1) * var(--i)) 
+  );
+  --blue: calc(
+    var(--initial-b) 
+    +
+    ((var(--final-b) - var(--initial-b)) / (var(--number-menu-bars) - 1) * var(--i)) 
+  );
+  background-color: rgb(
+    var(--red),
+    var(--green),
+    var(--blue)
+  );
+
+  bottom: calc(
+    (var(--number-menu-bars) - var(--i) - 1) 
+    * 
+    (var(--menu-bar-height) * 1.2)
+  );
+}
