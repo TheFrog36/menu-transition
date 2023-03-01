@@ -8,8 +8,8 @@
   --menu-bars-initiially-visible: 5;
   --menu-animation-delay: 0.2s;
   --number-menu-bars: 10;
-  --menu-bar-height: 30px;
-  --menu-reveal-animation-duration: 2s;
+  --menu-bar-height: 26px;
+  --menu-reveal-animation-duration: 1s;
   --background-color: #0a0a0a;
 }
 
@@ -58,7 +58,6 @@ button:hover {
   position: absolute;
   height: var(--menu-bar-height);
   border: 1px solid white;
-  /* width: 100%; */
   transform-origin: calc(var(--menu-bar-height) / 2) calc(var(--menu-bar-height) / 2);
   transform: rotate(45deg);
   border-radius: calc(var(--menu-bar-height) / 2);
@@ -95,16 +94,19 @@ button:hover {
     var(--blue)
   );
   z-index: calc(100 - var(--i));
-  transition: transform, bottom, left, background-color, width 3s;
+  transition: transform, bottom, left, background-color, width, justify-content;
   transition-duration: var(--menu-reveal-animation-duration);
   transition-delay: calc(var(--i) * var(--menu-animation-delay));
 } 
+
 
 .menu-icon {
   height: 100%;
   aspect-ratio: 1;
   background-color: var(--background-color);
   border-radius: 50%;
+  transition-duration: var(--menu-reveal-animation-duration);
+  transition-delay: calc(var(--i) * var(--menu-animation-delay));
 }
 
 .menu-horizontal{
