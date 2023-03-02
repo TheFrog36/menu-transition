@@ -58,7 +58,7 @@ button:hover {
 .menu-bar{
   position: absolute;
   height: var(--menu-bar-height);
-  border: 1px solid white;
+  /* border: 1px solid white; */
   transform-origin: calc(var(--menu-bar-height) / 2) calc(var(--menu-bar-height) / 2);
   transform: rotate(45deg);
   border-radius: calc(var(--menu-bar-height) / 2);
