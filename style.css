@@ -13,6 +13,7 @@
   --menu-reveal-animation-duration: 1.5s;
   --background-color: #0a0a0a;
   --sun-size: 110px;
+  --bar-gap-size: 3px;
 }
 
 *{
@@ -121,12 +122,13 @@ button:hover {
 
 .sun-bar{
   position: absolute;
-  bottom: calc((var(--j) + 1) * var(--menu-bar-height) / 2 - (-3px * var(--j)));
+  bottom: calc((var(--j)) * (var(--bar-gap-size) + var(--menu-bar-height)/2 - var(--bar-gap-size)/2) + var(--menu-bar-height)/2 - var(--bar-gap-size)/2 );
   width: 100%;
-  height: 3px;
+  height: var(--bar-gap-size);
   background-color: var(--background-color);
   transition-duration: var(--menu-reveal-animation-duration);
   transform: height, bottom;
+  pointer-events: none;
 }
 
 .menu-icon {
