@@ -11,6 +11,7 @@
   --menu-bar-height: 26px;
   --menu-reveal-animation-duration: 0.7s;
   --background-color: #0a0a0a;
+  --sun-size: 110px;
 }
 
 *{
@@ -99,6 +100,23 @@ button:hover {
   transition-delay: calc(var(--i) * var(--menu-animation-delay));
 } 
 
+#sun-container{
+  position: absolute;
+  width: var(--sun-size);
+  top: calc(0px - var(--sun-size) / 3 * 2 - 5px);
+  aspect-ratio: 3/2;
+  left: calc(50% - var(--sun-size) / 2);
+  overflow: hidden;
+  transition-duration: calc(var(--menu-reveal-animation-duration));
+  transform: aspect-ratio, width;
+}
+
+#sun{
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:  linear-gradient(180deg, rgba(255,192,0,1) 0%, rgba(183,5,202,1) 100%);
+}
 
 .menu-icon {
   height: 100%;
@@ -138,4 +156,11 @@ button:hover {
     * 
     (var(--menu-bar-height) * 1.2)
   );
+}
+
+.menu-horizontal #sun-container{
+  aspect-ratio: 1;
+  top: calc(0px - var(--menu-bar-height) * 2 - 5px);
+  width: calc(var(--menu-bar-height) * 2);
+  left: 0px
 }
