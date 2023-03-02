@@ -6,10 +6,10 @@
   --initial-g: 252;
   --initial-b: 243;
   --menu-bars-initiially-visible: 5;
-  --menu-animation-delay: 0.2s;
+  --menu-animation-delay: 0.1s;
   --number-menu-bars: 10;
   --menu-bar-height: 26px;
-  --menu-reveal-animation-duration: 1s;
+  --menu-reveal-animation-duration: 0.7s;
   --background-color: #0a0a0a;
 }
 
