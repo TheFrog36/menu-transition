@@ -19,6 +19,7 @@
   --sun-gradient: linear-gradient(180deg, rgba(255,192,0,1) 0%, rgba(183,5,202,1) 100%);
   --sun-bars: 2;
   --sun-bars-total-height: var(--menu-bar-height);
+  color-scheme: only light;
 }
 
 *{
@@ -30,7 +31,6 @@
 html, body{
   height: 100%;
   background-color: var(--background-color);
-  color: white;
 }
 
 #main-container{
