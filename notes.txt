@@ -6,3 +6,5 @@
   This will require to recalculate the length when at 45deg based on --gap
   Alsoalso the bottom pos of each bar at 45deg.
 - Resolve issue for phones in landscape mode
+
+- Currently doing: bar dot transparent

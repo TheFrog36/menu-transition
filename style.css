@@ -19,7 +19,7 @@
   --sun-gradient: linear-gradient(180deg, rgba(255,192,0,1) 0%, rgba(183,5,202,1) 100%);
   --sun-bars: 2;
   --sun-bars-total-height: var(--menu-bar-height);
-  color-scheme: only light;
+  --small-sun-width: calc(var(--menu-bar-height) * 2 + var(--bar-gap-size));
 }
 
 *{
@@ -130,41 +130,53 @@ html, body{
   );
 }
 
+.menu-horizontal #test-container{
+  width: var(--small-sun-width);
+  transition: width var(--menu-reveal-animation-duration) var(--menu-reveal-animation-duration);
+}
+
 .menu-horizontal #sun-container{
   aspect-ratio: 1;
-  top: calc(0px - var(--menu-bar-height) * 2 - 5px);
-  width: calc(var(--menu-bar-height) * 2);
-  left: 0px
+  width: var(--small-sun-width);
+  margin-left: 0px;
 }
 
 .menu-horizontal #slices-container{
   gap: 0px;
 }
 
-.menu-horizontal .sun-bar{
-  height: 0px;
-  bottom: calc((var(--j) + 1) * var(--menu-bar-height) / 4 - (-3px * var(--j)));
-}
-
 .menu-horizontal #main-sun-slice{
   height: 100%;
 }
 
+.menu-horizontal .sun-bar{
+  height: 0px;
+}
+
+
+#test-container{
+  bottom: calc(100% + var(--bar-gap-size));
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  transition: 
+    bottom var(--menu-reveal-animation-duration) 0s,
+    width var(--menu-reveal-animation-duration) 0s;
+}
+
 #sun-container{
   z-index: 1000;
-  position: absolute;
   width: var(--sun-size);
   aspect-ratio: var(--sun-aspect-ratio);
   overflow: hidden;
-  top: calc(0px - var(--sun-container-height) - var(--bar-gap-size));
-  left: calc(50% - var(--sun-size) / 2);
-  transition-duration: var(--menu-reveal-animation-duration);
-  transform: aspect-ratio, width;
+
+  transition: 
+    aspect-ratio var(--menu-reveal-animation-duration) var(--menu-reveal-animation-duration),
+    width var(--menu-reveal-animation-duration) var(--menu-reveal-animation-duration);
 }
 
-#sun-container *{
-  transition-duration: var(--menu-reveal-animation-duration);
-}
 
 #sun-circle{
   position: relative;
@@ -181,13 +193,14 @@ html, body{
   width: 100%;
   --slices-container-height: calc(1 / (var(--sun-aspect-ratio)) * 100%);
   height: var(--sun-container-height);
+  transition: gap var(--menu-reveal-animation-duration) var(--menu-reveal-animation-duration);
 }
 
 #main-sun-slice{
   width: 100%;
   height: calc(100% - var(--menu-bar-height) - var(--bar-gap-size));
   overflow: hidden;
-  transform: height;
+  transition: height var(--menu-reveal-animation-duration) var(--menu-reveal-animation-duration);
 }
 
 .sun{
@@ -203,7 +216,7 @@ html, body{
   width: 100%;
   --sun-bar-height: calc((var(--sun-bars-total-height) - (var(--sun-bars) - 1) * var(--bar-gap-size)) / var(--sun-bars));
   height: var(--sun-bar-height);
-  transform: height, bottom;
+  transition: height var(--menu-reveal-animation-duration) var(--menu-reveal-animation-duration);
 }
 
 .sun-bar .sun{
