@@ -1,0 +1,6 @@
+- Try to use css property "counter" instead of --i.
+- How hard is to make the bar dot transparent?
+
+- Currently just make the sun.
+    - Create each section individually, then put them in divs w/ flex so u can use
+      the gap as the actual gap
