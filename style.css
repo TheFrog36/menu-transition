@@ -13,8 +13,13 @@
   --menu-reveal-animation-duration: 1.5s;
   --background-color: #0a0a0a;
   --sun-size: 110px;
-  --bar-gap-size: 3px;
+  --sun-size: calc(var(--menu-bar-height) * 3);
   --sun-aspect-ratio: 3/2;
+  --sun-container-height: calc(1 / (var(--sun-aspect-ratio)) * var(--sun-size));
+  --bar-gap-size: 3px;
+  --sun-gradient: linear-gradient(180deg, rgba(255,192,0,1) 0%, rgba(183,5,202,1) 100%);
+  --sun-bars: 2;
+  --sun-bars-total-height: var(--menu-bar-height);
 }
 
 *{
@@ -103,7 +108,7 @@ button:hover {
   transition-delay: calc(var(--i) * var(--menu-animation-delay));
 } 
 
-#sun-container{
+/* #sun-container{
   position: absolute;
   width: var(--sun-size);
   top: calc(0px - var(--sun-size) / 3 * 2 - 3px);
@@ -112,9 +117,9 @@ button:hover {
   overflow: hidden;
   transition-duration: calc(var(--menu-reveal-animation-duration));
   transform: aspect-ratio, width;
-}
+} */
 
-#sun{
+/* #sun{
   width: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -130,7 +135,7 @@ button:hover {
   transition-duration: var(--menu-reveal-animation-duration);
   transform: height, bottom;
   pointer-events: none;
-}
+} */
 
 .menu-icon {
   height: 100%;
@@ -179,7 +184,74 @@ button:hover {
   left: 0px
 }
 
+.menu-horizontal #slices-container{
+  gap: 0px;
+}
+
 .menu-horizontal .sun-bar{
   height: 0px;
   bottom: calc((var(--j) + 1) * var(--menu-bar-height) / 4 - (-3px * var(--j)));
 }
+
+.menu-horizontal #main-sun-slice{
+  height: 100%;
+}
+
+
+
+
+#sun-container{
+  z-index: 1000;
+  position: absolute;
+  width: var(--sun-size);
+  aspect-ratio: var(--sun-aspect-ratio);
+  overflow: hidden;
+  top: calc(0px - var(--sun-container-height) - var(--bar-gap-size));
+  left: calc(50% - var(--sun-size) / 2);
+  transition-duration: calc(var(--menu-reveal-animation-duration));
+  transform: aspect-ratio, width;
+}
+#sun-container *{
+  transition-duration: calc(var(--menu-reveal-animation-duration));
+}
+#sun-circle{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+#slices-container{
+  display: flex;
+  flex-direction: column;
+  gap: var(--bar-gap-size);
+  width: 100%;
+  --slices-container-height: calc(1 / (var(--sun-aspect-ratio)) * 100%);
+  height: var(--sun-container-height);
+}
+#main-sun-slice{
+  width: 100%;
+  height: calc(100% - var(--menu-bar-height) - var(--bar-gap-size));
+  overflow: hidden;
+  transform: height;
+}
+.sun{
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--sun-gradient);
+}
+.sun-bar{
+  overflow: hidden;
+  position: relative;
+  height: calc((var(--menu-bar-height) - var(--bar-gap-size)) / var(--sun-bars));
+  width: 100%;
+  --sun-bar-height: calc((var(--sun-bars-total-height) - (var(--sun-bars) - 1) * var(--bar-gap-size)) / var(--sun-bars));
+  height: var(--sun-bar-height);
+  transform: height, bottom;
+}
+.sun-bar .sun{
+  position: absolute;
+  --main-slice-height: calc(var(--sun-container-height) - var(--sun-bars-total-height));
+  top: calc(0px - var(--main-slice-height) - (var(--z) * (var(--sun-bar-height) + var(--bar-gap-size))));
+}
+

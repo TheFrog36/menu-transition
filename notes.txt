@@ -1,5 +1,10 @@
 - Try to use css property "counter" instead of --i.
 - How hard is to make the bar dot transparent?
+- Move the sun in the current position, then make it set or rise slowly, for 
+  extra satisfaction
+- Make bars gap in function of the actual --gap
+  This will require to recalculate the length when at 45deg based on --gap
+  Alsoalso the bottom pos of each bar at 45deg.
 
 - Currently just make the sun.
     - Create each section individually, then put them in divs w/ flex so u can use
