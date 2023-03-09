@@ -132,7 +132,7 @@ html, body{
 
 .menu-horizontal #test-container{
   width: var(--small-sun-width);
-  transition: width var(--menu-reveal-animation-duration) var(--menu-reveal-animation-duration);
+  transition: width var(--menu-reveal-animation-duration) calc(var(--menu-reveal-animation-duration) * 2);
 }
 
 .menu-horizontal #sun-container{
