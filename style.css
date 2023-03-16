@@ -48,7 +48,6 @@ html, body{
 .menu-bar{
   position: absolute;
   height: var(--menu-bar-height);
-  /* border: 1px solid white; */
   transform-origin: calc(var(--menu-bar-height) / 2) calc(var(--menu-bar-height) / 2);
   transform: rotate(45deg);
   border-radius: calc(var(--menu-bar-height) / 2);
@@ -90,6 +89,8 @@ html, body{
   transition-delay: calc(var(--i) * var(--menu-animation-delay));
 } 
 
+
+
 .menu-icon {
   height: 100%;
   aspect-ratio: 1;
@@ -99,7 +100,7 @@ html, body{
   transition-delay: calc(var(--i) * var(--menu-animation-delay));
 }
 
-.menu-horizontal{
+/* .menu-horizontal{
   width: 100%;
   transform: rotate(0deg);
   --red: calc(
@@ -117,18 +118,19 @@ html, body{
     +
     ((var(--final-b) - var(--initial-b)) / (var(--number-menu-bars) - 1) * var(--i)) 
   );
-  background-color: rgb(
+  --color: rgb(
     var(--red),
     var(--green),
     var(--blue)
   );
+
 
   bottom: calc(
     (var(--number-menu-bars) - var(--i) - 1) 
     * 
     (var(--menu-bar-height) * 1.2)
   );
-}
+} */
 
 .menu-horizontal #sun-positioner{
   width: var(--small-sun-width);
@@ -225,33 +227,170 @@ html, body{
   top: calc(0px - var(--main-slice-height) - (var(--z) * (var(--sun-bar-height) + var(--bar-gap-size))));
 }
 
-#test-dot-container{
-  z-index: 1000;
+
+
+
+
+
+
+
+.menu-bar-container{
+  width: 100%;
   position: absolute;
-  top: 12.5px;
-  left: 0px;
-  width: var(--menu-bar-height);
+  height: var(--menu-bar-height);
+  position: absolute;
+  transform-origin: calc(var(--menu-bar-height) / 2) calc(var(--menu-bar-height) / 2);
+  transform: rotate(45deg);
+  bottom: calc(
+    (var(--menu-bars-initiially-visible) - var(--i) - 1) 
+    * 
+    (var(--menu-bar-height) * 1.6)
+  );
+  width: calc(
+    var(--menu-bar-height) + 
+    (var(--menu-bars-initiially-visible) - var(--i) - 1) 
+    * 
+    (var(--menu-bar-height) * 2.26)
+  );
+  z-index: calc(100 - var(--i));
+  transition: transform, bottom, left, background-color, width, justify-content, border;
+  transition-duration: var(--menu-reveal-animation-duration);
+  transition-delay: calc(var(--i) * var(--menu-animation-delay));
+  --red: calc(
+    var(--initial-r) 
+    +
+    ((var(--final-r) - var(--initial-r)) / (var(--menu-bars-initiially-visible) - 1) * var(--i)) 
+  );
+  --green: calc(
+    var(--initial-g) 
+    +
+    ((var(--final-g) - var(--initial-g)) / (var(--menu-bars-initiially-visible) - 1) * var(--i)) 
+  );
+  --blue: calc(
+    var(--initial-b) 
+    +
+    ((var(--final-b) - var(--initial-b)) / (var(--menu-bars-initiially-visible) - 1) * var(--i)) 
+  );
+  --calculated-bar-color: rgb(
+    var(--red),
+    var(--green),
+    var(--blue) 
+  );
+}
+
+.menu-bar-color{
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--menu-bar-height) / 2);
+  overflow: hidden;
+  position: relative;
+  transition: transform, bottom, left, background-color, width, justify-content, border;
+  transition-duration: var(--menu-reveal-animation-duration);
+  transition-delay: calc(var(--i) * var(--menu-animation-delay));
+
+}
+
+.menu-dot{
+  height: 100%;
   aspect-ratio: 1;
- 
+  border: 4px solid var(--calculated-bar-color);
+  border-radius: 50%;
+  /* box-shadow is used to cover the sub-pixel between menu-dot and menu-dot::before*/
+  --shadow-displacement: calc(var(--menu-bar-height) / 4);
+  box-shadow: 
+    var(--shadow-displacement) calc(0px - var(--shadow-displacement)) 0px calc(0px - var(--shadow-displacement)) var(--calculated-bar-color),
+    var(--shadow-displacement) calc(var(--shadow-displacement)) 0px calc(0px - var(--shadow-displacement)) var(--calculated-bar-color);
 }
 
-#test-dot-square{
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  border: 4px solid red;
-  width: 100%;
-  height: 100%;
-  border-radius: 50% 0% 0% 50%; 
+.menu-dot, .menu-dot::before, .menu-dot::after{
+  transition: transform, bottom, left, background-color, width, justify-content, border-color;
+  transition-duration: var(--menu-reveal-animation-duration);
+  transition-delay: calc(var(--i) * var(--menu-animation-delay));
 }
 
-#test-dot-circle{
+.menu-dot::before{
+  content: "";
+  border: 4px solid var(--calculated-bar-color);
+  border-radius: 50% 0 0 50%;
   position: absolute;
+  box-sizing: border-box;
   top: 0px;
   left: 0px;
-  border: 4px solid red;
-  width: 100%;
   height: 100%;
-  border-radius: 50% 50% 50% 50%; 
+  aspect-ratio: 1;
+  
+}
+
+.menu-dot::after{
+  content: "";
+  height: 100%;
+  background-color: var(--calculated-bar-color);
+  position: absolute;
+  width: 100%;
+  top: 0px;
+  /* 1px has been removed from left to cover a weird sub-pixel gap*/
+  left: calc(var(--menu-bar-height) - 1px);
+}
+
+.menu-horizontal{
+  width: 100%;
+  transform: rotate(0deg);
+  --red: calc(
+    var(--initial-r) 
+    +
+    ((var(--final-r) - var(--initial-r)) / (var(--number-menu-bars) - 1) * var(--i)) 
+  );
+  --green: calc(
+    var(--initial-g) 
+    +
+    ((var(--final-g) - var(--initial-g)) / (var(--number-menu-bars) - 1) * var(--i)) 
+  );
+  --blue: calc(
+    var(--initial-b) 
+    +
+    ((var(--final-b) - var(--initial-b)) / (var(--number-menu-bars) - 1) * var(--i)) 
+  );
+  border-color: rgb(
+    var(--red),
+    var(--green),
+    var(--blue)
+  );
+
+  /* border-color: var(--color); */
+  bottom: calc(
+    (var(--number-menu-bars) - var(--i) - 1) 
+    * 
+    (var(--menu-bar-height) * 1.2)
+  );
+}
+
+#test{
+  position: absolute;
+  height: var(--menu-bar-height);
+  aspect-ratio: 1;
+  top: 0px;
+  left: 0px;
+  /* box-shadow: inset -8px -0px 0px 0px white; */
+}
+
+#test-circle{
+  width: 100%;
+  aspect-ratio: 1;
+  border: 4px solid red;
+  position: absolute;
+  border-radius: 50%;
+  --shadow-displacement: calc(var(--menu-bar-height) / 4);
+  box-shadow: 
+    var(--shadow-displacement) calc(0px - var(--shadow-displacement)) 0px calc(0px - var(--shadow-displacement)) rgb(255, 255, 255),
+    var(--shadow-displacement) calc(var(--shadow-displacement)) 0px calc(0px - var(--shadow-displacement)) rgb(255, 255, 255);
+}
+
+#test-not-circle{
+  width: 100%;
+  aspect-ratio: 1;
+  border: 4px solid red;
+  position: absolute;
+  /* left: 100%; */
+  border-radius: 50% 0 0 50%;
 }
 
