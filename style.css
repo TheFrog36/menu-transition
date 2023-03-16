@@ -10,7 +10,7 @@
   --number-menu-bars: 10;
   --menu-bar-height: 26px;
   /* --menu-reveal-animation-duration: 0.7s; */
-  --menu-reveal-animation-duration: 1.3s;
+  --menu-reveal-animation-duration: 1.5s;
   --background-color: #0a0a0a;
   --sun-size: calc(var(--menu-bar-height) * 4);
   --sun-aspect-ratio: 3/2;
